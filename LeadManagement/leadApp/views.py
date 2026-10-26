@@ -14,7 +14,8 @@ from rest_framework.filters import SearchFilter,OrderingFilter
 class LeadCreateListView(CreateAPIView,ListAPIView):
     serializer_class=LeadSerializer
     queryset=Lead.objects.all()
-    authentication_classes=[authentication.BasicAuthentication]
+    # authentication_classes=[authentication.BasicAuthentication]
+    authentication_classes=[authentication.TokenAuthentication]
     permission_classes=[permissions.IsAuthenticated]
     filter_backends=[
         DjangoFilterBackend,
@@ -26,6 +27,7 @@ class LeadCreateListView(CreateAPIView,ListAPIView):
     filterset_fields=['status','source']
 
 class LeadRetrieveUpdateDeleteView(UpdateAPIView,RetrieveAPIView,DestroyAPIView):
+    # authentication_classes=[authentication.BasicAuthentication]
     authentication_classes=[authentication.BasicAuthentication]
     permission_classes=[permissions.IsAuthenticated]
     serializer_class=LeadSerializer
